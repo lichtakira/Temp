@@ -1,0 +1,59 @@
+echo "[Media]
+name=Media
+baseurl=file:///run/media/root/RHEL-7.2\ Server.x86_64
+gpgkey=file:///run/media/root/RHEL-7.2\ Server.x86_64/RPM-GPG-KEY-redhat-release
+gpgcheck=1
+enabled=1
+
+" >> /etc/yum.repos.d/Media.repo
+yum repolist
+yum -y install --skip-broken "*" "*.i686"
+yum -y install --skip-broken openslp-2.0.0-5.el7.i686 tog-pegasus-libs-2.14.1-3.el7.i686
+
+echo "[EPEL]
+name=EPEL
+baseurl=https://dl.fedoraproject.org/pub/epel/7/x86_64
+gpgkey=https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+gpgcheck=1
+enabled=1
+
+" >> /etc/yum.repos.d/EPEL.repo
+yum repolist
+yum -y install --skip-broken "ntfs*" "gcc*" "p7zip*" "gtk*" unar
+
+mkdir /mnt/CentOS-7-x86_64-Everything-1511_iso /mnt/rhel-server-7.2-x86_64-dvd_iso /mnt/V100082-01_iso
+cp -r /run/media/root/B82281322280F722/LinuxInstall/ISOs /home
+echo "
+/home/ISOs/CentOS-7-x86_64-Everything-1511.iso	/mnt/CentOS-7-x86_64-Everything-1511_iso	iso9660	defaults,ro	0	0
+/home/ISOs/rhel-server-7.2-x86_64-dvd.iso	/mnt/rhel-server-7.2-x86_64-dvd_iso		iso9660	defaults,ro	0	0
+/home/ISOs/rhel-server-7.2-x86_64-dvd.iso	/mnt/V100082-01_iso				iso9660	defaults,ro	0	0
+
+" >> /etc/fstab
+mount -a
+
+rm -r -f /etc/yum.repos.d/Media /etc/yum.repos.d/EPEL.repo
+\cp -r -f /run/media/root/B82281322280F722/LinuxInstall/YumRepo/yum.repos.d /etc
+\cp -r -f /run/media/root/B82281322280F722/LinuxInstall/YumRepo/rpm-gpg /etc/pki
+
+yum repolist
+yum -y install --skip-broken "gtk*" "gtk*.i686" "adwaita*" "adwaita*.i686"
+yum -y install --skip-broken "libreoffice*" "thunderbird*" "rhythmbox*"
+
+
+cp -r /run/media/root/B82281322280F722/LinuxInstall/Installation /home
+cp -r /run/media/root/B82281322280F722/LinuxInstall/Java /home/Installation
+
+cd /home/Installation/Java
+yum -y install --skip-broken ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
+rm -f ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
+
+clear
+
+#below is try to fix VMware GTK Message
+#echo "/usr/lib64/gtk-2.0/modules" > /etc/ld.so.conf.d/gtk2.conf
+#ldconfig
+
+#./VMware-Workstation-Full-12.1.0-3272444.x86_64.bundle --console --eulas-agreed
+# carefully read the optioins
+#	enter / no / enter / enter / enter / Input Keys Here / enter 
+ 
