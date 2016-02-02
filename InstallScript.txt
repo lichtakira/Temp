@@ -22,7 +22,6 @@ yum repolist
 yum -y install --skip-broken "ntfs*" "gcc*" "p7zip*" "gtk*" unar
 
 mkdir /mnt/CentOS-7-x86_64-Everything-1511_iso /mnt/rhel-server-7.2-x86_64-dvd_iso /mnt/V100082-01_iso
-cp -r /run/media/root/B82281322280F722/LinuxInstall/ISOs /home
 echo "
 /home/ISOs/CentOS-7-x86_64-Everything-1511.iso	/mnt/CentOS-7-x86_64-Everything-1511_iso	iso9660	defaults,ro	0	0
 /home/ISOs/rhel-server-7.2-x86_64-dvd.iso	/mnt/rhel-server-7.2-x86_64-dvd_iso		iso9660	defaults,ro	0	0
