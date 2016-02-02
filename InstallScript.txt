@@ -29,31 +29,3 @@ echo "
 /home/ISOs/rhel-server-7.2-x86_64-dvd.iso	/mnt/V100082-01_iso				iso9660	defaults,ro	0	0
 
 " >> /etc/fstab
-mount -a
-
-rm -r -f /etc/yum.repos.d/Media /etc/yum.repos.d/EPEL.repo
-\cp -r -f /run/media/root/B82281322280F722/LinuxInstall/YumRepo/yum.repos.d /etc
-\cp -r -f /run/media/root/B82281322280F722/LinuxInstall/YumRepo/rpm-gpg /etc/pki
-
-yum repolist
-yum -y install --skip-broken "gtk*" "gtk*.i686" "adwaita*" "adwaita*.i686"
-yum -y install --skip-broken "libreoffice*" "thunderbird*" "rhythmbox*"
-
-
-cp -r /run/media/root/B82281322280F722/LinuxInstall/Installation /home
-cp -r /run/media/root/B82281322280F722/LinuxInstall/Java /home/Installation
-
-cd /home/Installation/Java
-yum -y install --skip-broken ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
-rm -f ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
-
-clear
-
-#below is try to fix VMware GTK Message
-#echo "/usr/lib64/gtk-2.0/modules" > /etc/ld.so.conf.d/gtk2.conf
-#ldconfig
-
-#./VMware-Workstation-Full-12.1.0-3272444.x86_64.bundle --console --eulas-agreed
-# carefully read the optioins
-#	enter / no / enter / enter / enter / Input Keys Here / enter 
- 
