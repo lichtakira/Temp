@@ -1,5 +1,6 @@
 # mkdir /home/Installation /Logs
 # echo " " >> /home/Installation/Installation.sh
+# chmod 555 /home/Installation/Installation.sh
 # gedit /home/Installation/Installation.sh
 # /home/Installation/Installation.sh >> /Logs/Installation.log
 
