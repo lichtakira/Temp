@@ -4,7 +4,6 @@
 # gedit /home/Installation/Installation.sh
 # /home/Installation/Installation.sh >> /Logs/Installation.log
 
-
 echo "[Media]
 name=Media
 baseurl=file:///run/media/root/RHEL-7.2\ Server.x86_64
@@ -30,8 +29,7 @@ yum -y install --skip-broken "ntfs*" "gcc*" "p7zip*" "gtk*" unar
 
 mkdir /mnt/CentOS-7-x86_64-Everything-1511_iso /mnt/rhel-server-7.2-x86_64-dvd_iso /mnt/V100082-01_iso
 cp -r /run/media/root/B82281322280F722/LinuxInstall/ISOs /home
-cd /home/Installation
-cp -r /run/media/root/B82281322280F722/LinuxInstall/Software/* ./
+cp -r /run/media/root/B82281322280F722/LinuxInstall/Software/* /home/Installation
 
 echo "
 /home/ISOs/CentOS-7-x86_64-Everything-1511.iso	/mnt/CentOS-7-x86_64-Everything-1511_iso	iso9660	defaults,ro	0	0
@@ -40,18 +38,22 @@ echo "
 
 " >> /etc/fstab
 mount -a
-rm -r -f /etc/yum.repos.d/Media /etc/yum.repos.d/EPEL.repo
+
+cd /home/Installation
+\rm /etc/yum.repos.d/Media.repo /etc/yum.repos.d/EPEL.repo
 tar zxvf YumRepo.tar.gz
+\rm YumRepo.tar.gz
 \cp -r -f ./YumRepo/yum.repos.d /etc
 \cp -r -f ./YumRepo/rpm-gpg /etc/pki
-
+\rm -r YumRepo/
 tar zxvf Java.tar.gz
+\rm Java.tar.gz
 cd ./Java
 yum -y install --skip-broken ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
-\rm -f ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
+\rm ./jdk-8u72-linux-x64-demos.rpm ./jdk-8u72-linux-x64.rpm ./jre-8u72-linux-x64.rpm
 cd /usr/lib64
 tar xjf /home/Installation/firefox-44.0.tar.bz2
-\rm -f /home/Installation/firefox-44.0.tar.bz2
+\rm /home/Installation/firefox-44.0.tar.bz2
 
 cd
 yum repolist
