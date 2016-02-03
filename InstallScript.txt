@@ -15,7 +15,6 @@ enabled=1
 yum repolist
 yum -y install --skip-broken "*" "*.i686"
 yum -y install --skip-broken openslp-2.0.0-5.el7.i686 tog-pegasus-libs-2.14.1-3.el7.i686
-
 echo "[EPEL]
 name=EPEL
 baseurl=https://dl.fedoraproject.org/pub/epel/7/x86_64
@@ -26,3 +25,4 @@ enabled=1
 " >> /etc/yum.repos.d/EPEL.repo
 yum repolist
 yum -y install --skip-broken "ntfs*" "gcc*" "p7zip*" "gtk*" unar
+\rm /etc/yum.repos.d/Media.repo /etc/yum.repos.d/EPEL.repo
